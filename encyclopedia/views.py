@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import render
 from django.http import HttpResponse
 from . import util
+import random
 
 class NewPage(forms.Form):
     title = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder':'Enter title'}))
@@ -33,4 +34,12 @@ def new_page(request):
     return render(request, "encyclopedia/new_page.html", {
         "form": NewPage()
     })
+
+def random_page(request):
+    pages = util.list_entries()
+    random_num = random.randint(0, len(pages)-1)
+    return render(request, "encyclopedia/title_page.html", {
+        "title":pages[random_num],
+        "content":util.get_entry(pages[random_num])
+        })
        
