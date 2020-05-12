@@ -8,4 +8,3 @@ urlpatterns = [
     path("randompage", views.random_page, name="randompage"),
     path("<str:TITLE>", views.load_title, name="title")
 ]
-

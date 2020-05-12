@@ -9,9 +9,19 @@ class NewPage(forms.Form):
     desc = forms.CharField(label="",widget=forms.Textarea(attrs={'placeholder':'Enter Description'}))
 
 def index(request):
-    return render(request, "encyclopedia/index.html", {
-        "entries": util.list_entries()
-    })
+    if request.method=='GET':
+        if ('q' in request.GET):
+            query = request.GET['q']
+            entries = util.list_entries()
+            for i in entries:
+                if query in i:
+                    return HttpResponse("yo")
+            return HttpResponse("No")        
+    
+        else:
+            return render(request, "encyclopedia/index.html", {
+                "entries": util.list_entries()
+            }) 
 
 def load_title(request, TITLE):
     return render(request, "encyclopedia/title_page.html", {
@@ -42,4 +52,3 @@ def random_page(request):
         "title":pages[random_num],
         "content":util.get_entry(pages[random_num])
         })
-       
