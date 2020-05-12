@@ -15,8 +15,12 @@ def index(request):
             entries = util.list_entries()
             for i in entries:
                 if query in i:
-                    return HttpResponse("yo")
-            return HttpResponse("No")        
+                    return render(request, "encyclopedia/search_result.html", {
+                        "entry": i
+                    })
+            return render(request, "encyclopedia/search_result.html", {
+                    "entry": ""
+            })    
     
         else:
             return render(request, "encyclopedia/index.html", {

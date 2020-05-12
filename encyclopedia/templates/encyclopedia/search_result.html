@@ -1,9 +1,10 @@
-{% extends "encyclopedia/search_result.html" %}
+{% extends "encyclopedia/layout.html" %}
 
 { % block title %}
     Search Results
 { % endblock %}
 
 {% block body %}
-    yessirki
+    <h1>Search Results</h1>
+    <a href="{{entry}}">{{entry}}</a>
 {% endblock %}
